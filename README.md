@@ -4,8 +4,6 @@ A Pen created on CodePen.
 
 Original URL: [https://codepen.io/robin-ivi/pen/ZYEbZzd](https://codepen.io/robin-ivi/pen/ZYEbZzd).
 
-Here’s a well-structured and professional **README** for your **Love Language Discovery** project:
-
 ---
 
 # Love Language Discovery
