@@ -52,7 +52,7 @@ A web-based interactive tool designed to help users discover their primary love 
 
 ## Example Screenshot
 
-![Love Language Discovery](path-to-screenshot.png)
+![Love Language Discovery](https://github.com/user-attachments/assets/bd8be347-192f-4d0e-b9f9-0b05ca03b4b4)
 
 ## Contributing
 
@@ -77,3 +77,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 This **README** provides an introduction to the project, guides for installation and usage, and invites contributions from others, ensuring your repository is well-documented for users and developers. Feel free to personalize it further based on your needs!
+![Red and White Modern](https://github.com/user-attachments/assets/4c13cc18-dcfb-4075-901f-76865c30008c)
+
