@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Frontend Challenge: February Edition!</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Language Discovery</title>
+</head>
+<body>
+    <div id="app-container">
+      
+        <!-- Add multiple hearts using ❤️ symbol -->
+    <div class="heart" style="top: 10%; left: 10%;">❤️</div>
+    <div class="heart" style="top: 30%; left: 40%;">❤️</div>
+    <div class="heart" style="top: 50%; left: 70%;">❤️</div>
+    <div class="heart" style="top: 70%; left: 20%;">❤️</div>
+    <div class="heart" style="top: 80%; left: 50%;">❤️</div>
+
+    <!-- Flower elements for animation -->
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+      
+        <!-- Hero Section -->
+        <section id="hero">
+            <h1 class="title">Discover Your Love Language</h1>
+            <p class="subtitle">Understanding how you give and receive love</p>
+            <div id="language-cards">
+                <div class="card" data-language="words">Words of Affirmation</div>
+                <div class="card" data-language="acts">Acts of Service</div>
+                <div class="card" data-language="gifts">Receiving Gifts</div>
+                <div class="card" data-language="time">Quality Time</div>
+                <div class="card" data-language="touch">Physical Touch</div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section">
+            <h2>What's Your Primary Love Language?</h2>
+            <div id="quiz-container">
+                <div id="question-display">Click Start to Begin</div>
+                <div id="options-container"></div>
+                <button id="start-quiz">Start Quiz</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section">
+            <h2>Love Language Distribution</h2>
+            <div id="chart-container">
+                <div class="bar-container" data-language="words">
+                    <div class="bar">Words</div>
+                </div>
+                <div class="bar-container" data-language="acts">
+                    <div class="bar">Acts</div>
+                </div>
+                <div class="bar-container" data-language="gifts">
+                    <div class="bar">Gifts</div>
+                </div>
+                <div class="bar-container" data-language="time">
+                    <div class="bar">Time</div>
+                </div>
+                <div class="bar-container" data-language="touch">
+                    <div class="bar">Touch</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories">
+            <h2>Love Language Stories</h2>
+            <div id="story-carousel">
+                <div class="story-card" data-category="words">
+                    <h3>The Power of Words</h3>
+                    <p class="preview">A story about the impact of kind words...</p>
+                </div>
+                <div class="story-card" data-category="acts">
+                    <h3>Small Acts, Big Love</h3>
+                    <p class="preview">When actions speak louder...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Challenge Section -->
+        <section id="daily-challenge">
+            <h2>Today's Love Language Challenge</h2>
+            <div id="challenge-card">
+                <p id="challenge-text">Click to get today's challenge</p>
+                <button id="new-challenge">Get New Challenge</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Share your love language journey</p>
+        <div id="social-share">
+            <button class="share-btn" data-platform="twitter">Twitter</button>
+            <button class="share-btn" data-platform="facebook">Facebook</button>
+            <button class="share-btn" data-platform="instagram">Instagram</button>
+        </div>
+    </footer>
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
