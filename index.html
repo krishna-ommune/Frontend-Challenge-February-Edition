@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Language Discovery Er Robin</title>
     <link rel="stylesheet" href="./style.css">
+    <!-- Include Leaflet.js for an interactive map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
+
 <body>
     <div id="app-container">
-      
-        <!-- Add multiple hearts using ❤️ symbol -->
-    <div class="heart" style="top: 10%; left: 10%;">❤️</div>
-    <div class="heart" style="top: 30%; left: 40%;">❤️</div>
-    <div class="heart" style="top: 50%; left: 70%;">❤️</div>
-    <div class="heart" style="top: 70%; left: 20%;">❤️</div>
-    <div class="heart" style="top: 80%; left: 50%;">❤️</div>
 
-    <!-- Flower elements for animation -->
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-      
         <!-- Hero Section -->
         <section id="hero">
             <h1 class="title">Discover Your Love Language</h1>
@@ -74,15 +65,19 @@
         <!-- Stories Section -->
         <section id="stories">
             <h2>Love Language Stories</h2>
-            <div id="story-carousel">
-                <div class="story-card" data-category="words">
-                    <h3>The Power of Words</h3>
-                    <p class="preview">A story about the impact of kind words...</p>
-                </div>
-                <div class="story-card" data-category="acts">
-                    <h3>Small Acts, Big Love</h3>
-                    <p class="preview">When actions speak louder...</p>
-                </div>
+            <div id="story-carousel"></div>
+            <div id="story-nav">
+                <button id="prev-story">Previous</button>
+                <button id="next-story">Next</button>
+            </div>
+        </section>
+
+        <!-- Interactive Map Section -->
+        <section id="global-expressions">
+            <h2>Love Around the World</h2>
+            <div id="map-container">
+                <div id="map"></div>
+                <div id="region-info">Click on a region to learn more.</div>
             </div>
         </section>
 
@@ -107,4 +102,5 @@
 
 </body>
 <script src="./script.js"></script>
+
 </html>

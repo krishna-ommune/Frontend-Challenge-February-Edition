@@ -156,21 +156,124 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentQuestionIndex < questions.length) {
             questionDisplay.textContent = questions[currentQuestionIndex];
             optionsContainer.innerHTML = "";
-    
+
             answerOptions[currentQuestionIndex].forEach((option, index) => {
                 const value = Object.keys(scores)[index];
                 const button = createOptionButton({ text: option, value: value });
                 optionsContainer.appendChild(button);
             });
-    
+
             // Update Progress Bar
             const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
             document.getElementById("progress-bar").style.width = `${progress}%`;
-    
+
         } else {
             displayResults();
         }
     }
+    // Stories data
+    const stories = {
+        words: {
+            title: "The Power of Words",
+            preview: "A story about the impact of kind words...",
+            full: `When Clara lost her job, Mark began leaving daily love notes in her lunchbox. "Your laugh lights up rooms," one read. "Best decision I ever made was choosing you," said another. Over months, these paper hugs rebuilt her confidence.`
+        },
+        acts: {
+            title: "Small Acts, Big Love",
+            preview: "When actions speak louder...",
+            full: `Emma never noticed how Ethan quietly supported her. He'd wake early to defrost her car, memorize her coffee order, and secretly feed her parking meter.`
+        },
+        gifts: {
+            title: "Meaningful Gestures",
+            preview: "The art of thoughtful giving...",
+            full: `For their first anniversary, broke student Jake gifted Mia a mason jar filled with 365 folded stars.`
+        },
+        time: {
+            title: "Stolen Moments",
+            preview: "Moments that matter most...",
+            full: `For their 10th anniversary, Nora planned a surprise - 24 hours unplugged. No phones, no TV, just them.`
+        },
+        touch: {
+            title: "Silent Symphony",
+            preview: "Connection beyond words...",
+            full: `After losing his hearing in an accident, David learned love's new vocabulary.`
+        }
+    };
+
+    let currentStoryIndex = 0;
+    const storyKeys = Object.keys(stories);
+
+    function createStoryCard(index) {
+        const storyContainer = document.getElementById("story-carousel");
+        storyContainer.innerHTML = ""; // Clear previous story
+
+        const category = storyKeys[index];
+        const story = stories[category];
+
+        const card = document.createElement("div");
+        card.classList.add("story-card");
+        card.dataset.category = category;
+
+        card.innerHTML = `
+            <h3>${story.title}</h3>
+            <p class="preview">${story.preview}</p>
+            <span class="expand-btn">+</span>
+            <div class="full-story" style="display: none;">${story.full}</div>
+        `;
+
+        // Add click event for expanding story
+        card.querySelector(".expand-btn").addEventListener("click", function () {
+            const fullStory = card.querySelector(".full-story");
+            fullStory.style.display = fullStory.style.display === "block" ? "none" : "block";
+            this.textContent = this.textContent === "+" ? "-" : "+";
+        });
+
+        storyContainer.appendChild(card);
+    }
+
+    function updateStory(direction) {
+        if (direction === "next" && currentStoryIndex < storyKeys.length - 1) {
+            currentStoryIndex++;
+        } else if (direction === "prev" && currentStoryIndex > 0) {
+            currentStoryIndex--;
+        }
+        createStoryCard(currentStoryIndex);
+    }
+
+    // Event listeners for navigation buttons
+    document.getElementById("prev-story").addEventListener("click", () => updateStory("prev"));
+    document.getElementById("next-story").addEventListener("click", () => updateStory("next"));
+
+    // Load the first story on page load
+    createStoryCard(currentStoryIndex);
+
+
+
+    // Initialize Map
+    var map = L.map('map').setView([20, 0], 2); // Centered on the world
+
+    // Add Tile Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Region Data
+    const regions = {
+        asia: { lat: 34.0479, lng: 100.6197, info: "Asia: Love is often shown through deep familial bonds and traditions." },
+        europe: { lat: 54.5260, lng: 15.2551, info: "Europe: Romance is often expressed through art, poetry, and public gestures." },
+        americas: { lat: 37.0902, lng: -95.7129, info: "Americas: Love takes many forms, from passionate Latin dances to simple daily acts of kindness." },
+        africa: { lat: 1.2921, lng: 36.8219, info: "Africa: Love is expressed through community, storytelling, and dance." }
+    };
+
+    // Add Region Markers
+    Object.keys(regions).forEach(region => {
+        const { lat, lng, info } = regions[region];
+        L.marker([lat, lng]).addTo(map)
+            .bindPopup(`<strong>${region.toUpperCase()}</strong><br>${info}`)
+            .on('click', function () {
+                document.getElementById("region-info").innerText = info;
+            });
+    });
     
 });
 
