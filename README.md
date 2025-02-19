@@ -1,5 +1,6 @@
 # Frontend Challenge: February Edition!
 
+![Love Language Discovery](https://github.com/user-attachments/assets/bd8be347-192f-4d0e-b9f9-0b05ca03b4b4)
 A Pen created on CodePen.
 
 Original URL: [https://codepen.io/robin-ivi/pen/ZYEbZzd](https://codepen.io/robin-ivi/pen/ZYEbZzd).
@@ -47,10 +48,6 @@ A web-based interactive tool designed to help users discover their primary love 
 3. **Explore Stories**: Read real-life love language stories to gain insight into how others express their love.
 4. **Complete Challenges**: Accept daily challenges to improve the way you express love.
 5. **Share**: Share your results on social media with the integrated share buttons.
-
-## Example Screenshot
-
-![Love Language Discovery](https://github.com/user-attachments/assets/bd8be347-192f-4d0e-b9f9-0b05ca03b4b4)
 
 ## Contributing
 
