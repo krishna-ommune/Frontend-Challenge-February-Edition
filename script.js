@@ -1,28 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Define the questions and options for the quiz
+    let currentQuestion = 0;
+    let quizResults = { words: 0, acts: 0, gifts: 0, time: 0, touch: 0 };
+
     const questions = [
-        {
-            question: "How do you feel most loved?",
-            options: [
-                { text: "Hearing kind words", value: "words" },
-                { text: "Receiving help with tasks", value: "acts" },
-                { text: "Receiving gifts", value: "gifts" },
-                { text: "Spending quality time", value: "time" },
-                { text: "Physical affection", value: "touch" }
-            ]
-        },
-        {
-            question: "What makes your relationships stronger?",
-            options: [
-                { text: "Encouraging words", value: "words" },
-                { text: "Acts of service", value: "acts" },
-                { text: "Thoughtful gifts", value: "gifts" },
-                { text: "Meaningful time together", value: "time" },
-                { text: "Hugs and kisses", value: "touch" }
-            ]
-        }
+        "When feeling down, what cheers you up the most?",
+        "How do you prefer to show affection to your partner?",
+        "What makes you feel most appreciated in a relationship?",
+        "On your birthday, what would you most like your partner to do?",
+        "When you've had a tough day, what do you crave from your partner?",
+        "What makes you feel closest to someone?",
+        "How do you like to celebrate an achievement?",
+        "What do you miss most when you're apart from your partner?",
+        "What would make a date night special for you?",
+        "How do you feel most loved by a friend?"
     ];
 
+    const answerOptions = [
+        ["Hearing words of encouragement", "Having someone do a task for you", "Receiving a thoughtful gift", "Spending quality time together", "Getting a comforting hug"],
+        ["Saying 'I love you' and giving compliments", "Doing helpful tasks or chores", "Giving meaningful gifts", "Planning special dates", "Showing physical affection"],
+        ["Verbal praise and appreciation", "When they help with your responsibilities", "When they surprise you with gifts", "When they give you undivided attention", "When they show physical affection"],
+        ["Write you a heartfelt card", "Take care of all your chores", "Give you a special present", "Spend the whole day with you", "Give you lots of hugs and kisses"],
+        ["Words of reassurance", "Help with something practical", "A small 'pick-me-up' gift", "Undistracted listening", "A long, comforting hug"],
+        ["Deep and meaningful conversations", "Doing something helpful together", "Exchanging gifts", "Spending one-on-one time", "Physical closeness"],
+        ["A heartfelt compliment", "A kind gesture like cooking for you", "A surprise present", "A celebration together", "A big hug and high-five"],
+        ["Hearing their voice and kind words", "Missing their little acts of care", "Not receiving their surprise gifts", "Not spending time together", "Not getting their hugs and kisses"],
+        ["A deep conversation over dinner", "A night where everything is taken care of", "A surprise present at the end", "A long evening spent together", "Lots of hand-holding and cuddles"],
+        ["A sincere and heartfelt message", "A favor when needed", "A thoughtful gift", "A planned get-together", "A hug or physical support"]
+    ];
+
+    const languageCards = document.querySelectorAll(".card");
+    const heroSection = document.getElementById("hero");
+
+    languageCards.forEach(card => {
+        const language = card.dataset.language;
+        const example = document.createElement("div");
+        example.className = "card-example";
+        example.textContent = {
+            words: "Saying 'I love you' multiple times a day and offering sincere compliments.",
+            acts: "Doing chores without being asked or preparing a surprise meal for your partner.",
+            gifts: "Giving thoughtful, personalized presents, even if they're small.",
+            time: "Having a device-free date night or taking a walk together every evening.",
+            touch: "Holding hands while walking or giving a comforting hug after a long day."
+        }[language];
+        card.appendChild(example);
+
+        card.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const wasActive = card.classList.contains("active");
+
+            document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+            heroSection.classList.remove("card-expanded");
+
+            if (!wasActive) {
+                card.classList.add("active");
+                heroSection.classList.add("card-expanded");
+            }
+        });
+    });
+
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+        heroSection.classList.remove("card-expanded");
+    });
+
+    // QUIZ LOGIC
     let scores = { words: 0, acts: 0, gifts: 0, time: 0, touch: 0 };
     let currentQuestionIndex = 0;
 
@@ -30,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const optionsContainer = document.getElementById("options-container");
     const startQuizBtn = document.getElementById("start-quiz");
 
-    // Function to create and display options dynamically
     function createOptionButton(option) {
         const button = document.createElement("button");
         button.textContent = option.text;
@@ -40,23 +80,19 @@ document.addEventListener("DOMContentLoaded", function () {
         return button;
     }
 
-    // Handle the selection of an answer
     function handleOptionSelect(value) {
         scores[value]++;
         currentQuestionIndex++;
         showQuestion();
     }
 
-    // Display the current question and its options
     function showQuestion() {
         if (currentQuestionIndex < questions.length) {
-            const currentQuestion = questions[currentQuestionIndex];
-            questionDisplay.textContent = currentQuestion.question;
-            optionsContainer.innerHTML = ""; // Clear previous options
-
-            // Create and append each option dynamically
-            currentQuestion.options.forEach(option => {
-                const button = createOptionButton(option);
+            questionDisplay.textContent = questions[currentQuestionIndex];
+            optionsContainer.innerHTML = "";
+            answerOptions[currentQuestionIndex].forEach((option, index) => {
+                const value = Object.keys(scores)[index];
+                const button = createOptionButton({ text: option, value: value });
                 optionsContainer.appendChild(button);
             });
         } else {
@@ -64,29 +100,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Display the quiz results in a graphical format
     function displayResults() {
         questionDisplay.textContent = "Your Love Language Results!";
-        optionsContainer.innerHTML = ""; // Clear options container
+        optionsContainer.innerHTML = "";
 
         Object.keys(scores).forEach(language => {
             const barContainer = document.querySelector(`.bar-container[data-language="${language}"]`);
             if (barContainer) {
                 const bar = barContainer.querySelector(".bar");
-                const height = scores[language] * 50; // Scale the height of the bar
+                const height = scores[language] * 50;
                 bar.style.height = `${height}px`;
             }
         });
     }
 
-    // Initialize the quiz when the start button is clicked
     startQuizBtn.addEventListener("click", () => {
         currentQuestionIndex = 0;
-        scores = { words: 0, acts: 0, gifts: 0, time: 0, touch: 0 }; // Reset scores
+        scores = { words: 0, acts: 0, gifts: 0, time: 0, touch: 0 };
         showQuestion();
     });
 
-    // Define daily challenges
+    // DAILY CHALLENGES
     const dailyChallenges = [
         "Compliment someone sincerely today!",
         "Take time to listen deeply to someone you care about.",
@@ -98,18 +132,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const challengeText = document.getElementById("challenge-text");
     const newChallengeBtn = document.getElementById("new-challenge");
 
-    // Function to get a random challenge from the array
     function getRandomChallenge() {
-        const randomIndex = Math.floor(Math.random() * dailyChallenges.length);
-        return dailyChallenges[randomIndex];
+        return dailyChallenges[Math.floor(Math.random() * dailyChallenges.length)];
     }
 
-    // Display a new challenge when the button is clicked
     newChallengeBtn.addEventListener("click", () => {
         challengeText.textContent = getRandomChallenge();
     });
 
-    // Select love language based on card click
+    // LOVE LANGUAGE CARD SELECTION
     const cards = document.querySelectorAll(".card");
 
     cards.forEach(card => {
@@ -119,4 +150,27 @@ document.addEventListener("DOMContentLoaded", function () {
             alert(`You selected ${card.textContent}. Your ${selectedLanguage} score is now ${scores[selectedLanguage]}.`);
         });
     });
+
+
+    function showQuestion() {
+        if (currentQuestionIndex < questions.length) {
+            questionDisplay.textContent = questions[currentQuestionIndex];
+            optionsContainer.innerHTML = "";
+    
+            answerOptions[currentQuestionIndex].forEach((option, index) => {
+                const value = Object.keys(scores)[index];
+                const button = createOptionButton({ text: option, value: value });
+                optionsContainer.appendChild(button);
+            });
+    
+            // Update Progress Bar
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById("progress-bar").style.width = `${progress}%`;
+    
+        } else {
+            displayResults();
+        }
+    }
+    
 });
+

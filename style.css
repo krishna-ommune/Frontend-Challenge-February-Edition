@@ -120,7 +120,49 @@ button {
     font-weight: bold;
     transition: background 0.3s, transform 0.2s;
 }
+#language-cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
 
+#progress-bar {
+    width: 0%;
+    height: 8px;
+    background-color: #ff5a5f;
+    transition: width 0.3s ease-in-out;
+}
+
+.card {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+    width: 150px;
+    text-align: center;
+}
+.card:hover {
+    transform: scale(1.1);
+}
+.card-example {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+.card.active .card-example {
+    display: block;
+}
 button:hover {
     background: #ff6bcb;
     transform: scale(1.05);
